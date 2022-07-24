@@ -1,0 +1,10 @@
+name: AnchorFix
+version: '${project.version}'
+api-version: 1.7.10
+main: me.fadingfog.anchorfix.AnchorFix
+description: RailCraft anchor chunk loading fix
+website: https://github.com/FadingFog/
+authors: [FadingFog]
+commands:
+  mk:
+    description: idk
