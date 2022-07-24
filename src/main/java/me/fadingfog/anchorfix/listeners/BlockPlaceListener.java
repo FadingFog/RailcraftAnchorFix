@@ -19,31 +19,47 @@ public class BlockPlaceListener implements Listener {
 
     @EventHandler
     public void onPlaceTNT(BlockPlaceEvent event) {
+        String type;
         Block block = event.getBlock();
         Material material = block.getType();
 
-        if (material.equals(Material.TNT)){
+
+        if (material.toString().equals("RAILCRAFT_MACHINEALPHA")){
+            if (block.getData() == 2) {
+                type = "personal";
+            } else if (block.getData() == 13) {
+                type = "passive";
+            } else return;
+
             Player player = event.getPlayer();
             Location location = block.getLocation();
 
-            anchorStorage.setAnchor(player, "tnt", location);
+            anchorStorage.setAnchor(player, type, location);
             anchorStorage.save();
-            player.sendMessage("You are placed TNT at " + location.toString());
+            player.sendMessage("You are placed " + type + " anchor at " + location.toString());
         }
     }
 
     @EventHandler
     public void onBreakTNT(BlockBreakEvent event) {
+        String type;
         Block block = event.getBlock();
         Material material = block.getType();
 
-        if (material.equals(Material.TNT)){
+
+        if (material.toString().equals("RAILCRAFT_MACHINEALPHA")){
+            if (block.getData() == 2) {
+                type = "personal";
+            } else if (block.getData() == 13) {
+                type = "passive";
+            } else return;
+
             Player player = event.getPlayer();
             Location location = block.getLocation();
 
-            anchorStorage.removeAnchor(player, "tnt", location);
+            anchorStorage.removeAnchor(player, type, location);
             anchorStorage.save();
-            player.sendMessage("You are removed TNT at " + location.toString());
+            player.sendMessage("You are removed  " + type + " anchor at " + location.toString());
         }
     }
 

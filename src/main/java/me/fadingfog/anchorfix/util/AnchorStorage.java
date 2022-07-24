@@ -49,7 +49,7 @@ public class AnchorStorage {
         if (!anchorList.contains(loc)) {
             anchorList.add(loc);
             config.set(path, anchorList);
-            System.out.println("Anchor added to storage");
+            System.out.println("Anchor at " + loc.toString() + " added to storage");
         }
     }
 
@@ -60,11 +60,9 @@ public class AnchorStorage {
 
         if (config.isSet(path)){
             List<Map<?, ?>> anchorList = config.getMapList(path);
-            System.out.println(anchorList);
-            System.out.println(loc);
             if (anchorList.remove(loc)) {
                 config.set(path, anchorList);
-                System.out.println("Anchor removed from storage");
+                System.out.println("Anchor at " + loc.toString() + " removed from storage");
             }
         }
     }
