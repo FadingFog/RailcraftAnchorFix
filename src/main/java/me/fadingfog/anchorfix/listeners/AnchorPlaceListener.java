@@ -10,15 +10,16 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-public class BlockPlaceListener implements Listener {
+@SuppressWarnings("deprecation")
+public class AnchorPlaceListener implements Listener {
     private final AnchorStorage anchorStorage;
 
-    public BlockPlaceListener(AnchorStorage anchorStorage) {
+    public AnchorPlaceListener(AnchorStorage anchorStorage) {
         this.anchorStorage = anchorStorage;
     }
 
     @EventHandler
-    public void onPlaceTNT(BlockPlaceEvent event) {
+    public void onPlaceAnchor(BlockPlaceEvent event) {
         String type;
         Block block = event.getBlock();
         Material material = block.getType();
@@ -41,7 +42,7 @@ public class BlockPlaceListener implements Listener {
     }
 
     @EventHandler
-    public void onBreakTNT(BlockBreakEvent event) {
+    public void onBreakAnchor(BlockBreakEvent event) {
         String type;
         Block block = event.getBlock();
         Material material = block.getType();
