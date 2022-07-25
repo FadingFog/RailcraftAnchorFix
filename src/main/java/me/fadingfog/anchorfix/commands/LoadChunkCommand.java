@@ -84,8 +84,8 @@ public class LoadChunkCommand implements CommandExecutor {
                     scheduler.runTaskLater(plugin, () -> {
 //                    npc.world.getChunkAt(x, z).a(npc, 0);
 //                    npc.die();
-                        npc.world.players.remove(npc);
-                        npc.world.removeEntity(npc);
+//                    npc.world.players.remove(npc);
+                    npc.world.removeEntity(npc);
 
                     }, 20L * 2L );
                 }
@@ -93,7 +93,7 @@ public class LoadChunkCommand implements CommandExecutor {
 
                 message = "Npc created and deleted";
             }
-            else if (Objects.equals(args[0], "ent")) {
+            else if (args.length == 4 && Objects.equals(args[0], "ent")) {
                 Entity[] ents = world.getChunkAt(x, z).getEntities();
                 System.out.println( Arrays.toString(ents) );
                 message = "Entities printed";

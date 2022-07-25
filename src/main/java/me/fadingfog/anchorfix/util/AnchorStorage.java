@@ -40,6 +40,24 @@ public class AnchorStorage {
         return config;
     }
 
+    public List<Map<String, String>> getAnchorList(Player player) {
+        reload();
+        
+        List<Map<String, String>> anchorList = new ArrayList();
+        String playerName = player.getName();
+        String path = MessageFormat.format("anchor.{0}", playerName);
+
+        if (config.isSet(path)) {
+            Map<String, Object> anchorListPerType = config.getConfigurationSection(path).getValues(true);
+
+            for (Map.Entry<String, Object> pair : anchorListPerType.entrySet()) {
+                anchorList.addAll((Collection) pair.getValue());
+            }
+        }
+
+        return anchorList;
+    }
+
     public void setAnchor(Player player, String type, Location location) {
         List<Object> preparedData = preModifyAnchor(player, type, location);
         HashMap<String, String> loc = (HashMap) preparedData.get(0);
@@ -49,8 +67,9 @@ public class AnchorStorage {
         if (!anchorList.contains(loc)) {
             anchorList.add(loc);
             config.set(path, anchorList);
-            System.out.println("Anchor at " + loc.toString() + " added to storage");
         }
+
+        this.save();
     }
 
     public void removeAnchor(Player player, String type, Location location) {
@@ -58,13 +77,14 @@ public class AnchorStorage {
         HashMap<String, String> loc = (HashMap) preparedData.get(0);
         String path = (String) preparedData.get(1);
 
-        if (config.isSet(path)){
+        if (config.isSet(path)) {
             List<Map<?, ?>> anchorList = config.getMapList(path);
             if (anchorList.remove(loc)) {
                 config.set(path, anchorList);
-                System.out.println("Anchor at " + loc.toString() + " removed from storage");
             }
         }
+
+        this.save();
     }
 
     private List<Object> preModifyAnchor(Player player, String type, Location location) {

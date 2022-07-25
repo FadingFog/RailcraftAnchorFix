@@ -36,8 +36,6 @@ public class AnchorPlaceListener implements Listener {
             Location location = block.getLocation();
 
             anchorStorage.setAnchor(player, type, location);
-            anchorStorage.save();
-            player.sendMessage("You are placed " + type + " anchor at " + location.toString());
         }
     }
 
@@ -59,8 +57,6 @@ public class AnchorPlaceListener implements Listener {
             Location location = block.getLocation();
 
             anchorStorage.removeAnchor(player, type, location);
-            anchorStorage.save();
-            player.sendMessage("You are removed  " + type + " anchor at " + location.toString());
         }
     }
 
