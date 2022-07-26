@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings({"unchecked"})
-public class RemoveAllNPCCommand extends SubCommand{
+public class RemoveAllNPCCommand extends SubCommand {
 
     @Override
     public String getName() {

@@ -12,6 +12,7 @@ public class CommandManager implements CommandExecutor {
 
     public CommandManager() {
         subCommands.add(new RemoveAllNPCCommand());
+        subCommands.add(new CleanAnchorStorageCommand());
     }
 
     @Override
