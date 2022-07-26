@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitScheduler;
 
 import java.util.List;
@@ -48,12 +49,17 @@ public class PlayerJoinListener implements Listener {
 
             World world = Bukkit.getWorld(worldType);
 
+            if (world.isChunkLoaded(xChunk, zChunk)) {
+                continue;
+            }
+
             WorldServer nmsWorld = ((CraftWorld) world).getHandle();
             MinecraftServer nmsServer = ((CraftServer) Bukkit.getServer()).getServer();
             GameProfile gameProfile = new GameProfile(UUID.randomUUID(), "Tobi");
             EntityPlayer npc = new EntityPlayer(nmsServer, nmsWorld, gameProfile, new PlayerInteractManager(nmsWorld));
             npc.playerConnection = new PlayerConnection(npc.server, new NetworkManager(true), npc);
             npc.playerInteractManager.setGameMode(EnumGamemode.CREATIVE);
+            npc.getBukkitEntity().setMetadata("NPC", new FixedMetadataValue(plugin, Boolean.TRUE));
 
             world.loadChunk(xChunk, zChunk);
             world.refreshChunk(xChunk, zChunk);
@@ -61,7 +67,7 @@ public class PlayerJoinListener implements Listener {
             npc.spawnIn(nmsWorld);
             npc.setLocation(x, 60, z, 1, 1);
             npc.world.players.add(npc);
-            npc.world.getChunkAt(x, z).a(npc);  // Add npc to chunk entity list
+            npc.world.getChunkAt(xChunk, zChunk).a(npc);  // Add npc to chunk entity list
 
             scheduler.runTaskLater(plugin, () -> npc.world.removeEntity(npc), 20L * NPC_REMOVE_DELAY );
         }

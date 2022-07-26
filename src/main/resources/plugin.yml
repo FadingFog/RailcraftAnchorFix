@@ -6,5 +6,5 @@ description: RailCraft anchor chunk loading fix
 website: https://github.com/FadingFog/
 authors: [FadingFog]
 commands:
-  mk:
-    description: idk
+  anchorfix:
+    description: extra commands

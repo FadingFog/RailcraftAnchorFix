@@ -1,7 +1,7 @@
 package me.fadingfog.anchorfix;
 
 
-import me.fadingfog.anchorfix.commands.LoadChunkCommand;
+import me.fadingfog.anchorfix.commands.CommandManager;
 import me.fadingfog.anchorfix.listeners.AnchorPlaceListener;
 import me.fadingfog.anchorfix.listeners.PlayerJoinListener;
 import me.fadingfog.anchorfix.util.AnchorStorage;
@@ -22,9 +22,11 @@ public final class AnchorFix extends JavaPlugin{
 
         getServer().getPluginManager().registerEvents(new AnchorPlaceListener(anchorStorage), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(anchorStorage), this);
-        getCommand("mk").setExecutor(new LoadChunkCommand());
+        getCommand("anchorfix").setExecutor(new CommandManager());
 
     }
+
+    // In the onDisable can be added removal of all nps, if such exist
 
     public void loadAnchorStorage() {
         anchorStorage.LOAD_DEFAULT = true;

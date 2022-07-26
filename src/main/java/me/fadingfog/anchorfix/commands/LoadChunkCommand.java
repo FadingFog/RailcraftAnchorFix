@@ -93,7 +93,7 @@ public class LoadChunkCommand implements CommandExecutor {
 
                 message = "Npc created and deleted";
             }
-            else if (args.length == 4 && Objects.equals(args[0], "ent")) {
+            else if (Objects.equals(args[0], "ent")) {
                 Entity[] ents = world.getChunkAt(x, z).getEntities();
                 System.out.println( Arrays.toString(ents) );
                 message = "Entities printed";
