@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 
 public class CommandManager implements CommandExecutor {
-    private ArrayList<SubCommand> subCommands = new ArrayList<>();
+    private final ArrayList<SubCommand> subCommands = new ArrayList<>();
 
     public CommandManager() {
         subCommands.add(new RemoveAllNPCCommand());
@@ -23,20 +23,20 @@ public class CommandManager implements CommandExecutor {
 
             if (args.length > 0) {
                 for (int i = 0; i < getSubCommands().size(); i++) {
-                    SubCommand command1 = getSubCommands().get(i);
-                    if (args[0].equalsIgnoreCase(command1.getName())) {
-                        command1.perform(player, args);
+                    SubCommand sCommand = getSubCommands().get(i);
+                    if (args[0].equalsIgnoreCase(sCommand.getName())) {
+                        sCommand.perform(player, args);
+                        player.sendMessage(sCommand.getSuccessMessage());
+                        return true;
                     }
                 }
-            return true;
             }
         }
-
 
         return false;
     }
 
     public ArrayList<SubCommand> getSubCommands() {
-            return subCommands;
+        return subCommands;
     }
 }

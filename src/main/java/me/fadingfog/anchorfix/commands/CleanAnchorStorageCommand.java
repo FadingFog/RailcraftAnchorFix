@@ -13,10 +13,16 @@ import java.util.Map;
 
 public class CleanAnchorStorageCommand extends SubCommand {
     private final AnchorStorage anchorStorage = AnchorStorage.getInstance();
+    private int COUNTER = 0;
 
     @Override
     public String getName() {
         return "clean";
+    }
+
+    @Override
+    public String getSuccessMessage() {
+        return "Successfully removed " + COUNTER + " anchor(s) from config";
     }
 
     @Override
@@ -37,6 +43,7 @@ public class CleanAnchorStorageCommand extends SubCommand {
             if (!material.toString().equals("RAILCRAFT_MACHINEALPHA")) {
                 Location loc = new Location(world, x, y, z);
                 anchorStorage.removeAnchor(loc);
+                COUNTER++;
             }
         }
 

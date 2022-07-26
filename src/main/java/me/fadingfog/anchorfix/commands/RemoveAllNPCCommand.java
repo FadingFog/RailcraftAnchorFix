@@ -12,10 +12,16 @@ import java.util.List;
 
 @SuppressWarnings({"unchecked"})
 public class RemoveAllNPCCommand extends SubCommand {
+    private int COUNTER = 0;
 
     @Override
     public String getName() {
         return "remove";
+    }
+
+    @Override
+    public String getSuccessMessage() {
+        return "Successfully removed " + COUNTER + " npc";
     }
 
     @Override
@@ -37,9 +43,9 @@ public class RemoveAllNPCCommand extends SubCommand {
 
             for (EntityPlayer entity : entitiesToRemove) {
                 nmsWorld.removeEntity(entity);
+                COUNTER++;
             }
 
-            System.out.println(nmsWorld.players);
         }
 
     }

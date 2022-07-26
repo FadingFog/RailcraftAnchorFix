@@ -7,4 +7,12 @@ website: https://github.com/FadingFog/
 authors: [FadingFog]
 commands:
   anchorfix:
-    description: extra commands
+    description: Extra commands to control this plugin
+    usage: |
+           /<command> clean - remove missing in the world anchors from the config
+           /<command> remove - remove all npc created by this plugin
+    permission: anchorfix
+permissions:
+  anchorfix:
+    description: Allows to use anchorfix commands
+    default: op
