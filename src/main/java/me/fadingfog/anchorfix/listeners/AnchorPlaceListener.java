@@ -56,7 +56,7 @@ public class AnchorPlaceListener implements Listener {
             Player player = event.getPlayer();
             Location location = block.getLocation();
 
-            anchorStorage.removeAnchor(player, type, location);
+            anchorStorage.removeAnchor(type, location);
         }
     }
 

@@ -131,17 +131,38 @@ public class AnchorStorage {
 
     }
 
+    public void removeAnchor(String type, Location location) {
+        reload();
+
+        String path;
+
+        HashMap<String, String> loc = parseLocation(location);
+        Set<String> playerNames = config.getConfigurationSection("anchor").getKeys(false);
+
+        for (String playerName : playerNames) {
+            path = MessageFormat.format("anchor.{0}.{1}", playerName, type);
+            List<Map<?, ?>> anchorList = config.getMapList(path);
+
+            if (anchorList.contains(loc) && anchorList.remove(loc)) {
+                config.set(path, anchorList);
+                this.save();
+                break;
+            }
+        }
+
+    }
+
     public void removeAnchor(Player player, String type, Location location) {
         reload();
 
         String playerName = player.getName();
         HashMap<String, String> loc = parseLocation(location);
-        String path = MessageFormat.format("anchor.{0}.{1}", playerName, type);
+        String path = MessageFormat.format("anchor.{0}.{1}", playerName, type);  // Create path to anchor
 
-        if (config.isSet(path)) {
-            List<Map<?, ?>> anchorList = config.getMapList(path);
-            if (anchorList.remove(loc)) {
-                config.set(path, anchorList);
+        if (config.isSet(path)) {  // If path exists
+            List<Map<?, ?>> anchorList = config.getMapList(path);  // Get list of all anchors of current type
+            if (anchorList.remove(loc)) {  // If anchor location successfully deleted from list
+                config.set(path, anchorList);  // Set modified list
                 this.save();
             }
         }
