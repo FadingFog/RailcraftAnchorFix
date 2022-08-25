@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CommandManager implements CommandExecutor {
     private final ArrayList<SubCommand> subCommands = new ArrayList<>();
@@ -13,6 +14,7 @@ public class CommandManager implements CommandExecutor {
     public CommandManager() {
         subCommands.add(new RemoveAllNPCCommand());
         subCommands.add(new CleanAnchorStorageCommand());
+        subCommands.add(new CheckPlayerAnchorCommand());
     }
 
     @Override
@@ -25,8 +27,8 @@ public class CommandManager implements CommandExecutor {
                 for (int i = 0; i < getSubCommands().size(); i++) {
                     SubCommand sCommand = getSubCommands().get(i);
                     if (args[0].equalsIgnoreCase(sCommand.getName())) {
-                        sCommand.perform(player, args);
-                        player.sendMessage(sCommand.getSuccessMessage());
+                        sCommand.perform(player, Arrays.copyOfRange(args, 1, args.length));
+                        player.sendMessage(sCommand.getResultMessage());
                         return true;
                     }
                 }

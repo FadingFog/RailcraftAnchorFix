@@ -1,10 +1,7 @@
 package me.fadingfog.anchorfix.commands;
 
 import me.fadingfog.anchorfix.util.AnchorStorage;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -21,8 +18,8 @@ public class CleanAnchorStorageCommand extends SubCommand {
     }
 
     @Override
-    public String getSuccessMessage() {
-        return "Successfully removed " + COUNTER + " anchor(s) from config";
+    public String getResultMessage() {
+        return ChatColor.DARK_GREEN + "Successfully removed " + COUNTER + " anchor(s) from config";
     }
 
     @Override

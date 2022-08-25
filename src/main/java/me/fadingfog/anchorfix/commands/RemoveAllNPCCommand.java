@@ -3,6 +3,7 @@ package me.fadingfog.anchorfix.commands;
 import net.minecraft.server.v1_7_R4.EntityPlayer;
 import net.minecraft.server.v1_7_R4.WorldServer;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_7_R4.CraftWorld;
 import org.bukkit.entity.Player;
@@ -20,8 +21,8 @@ public class RemoveAllNPCCommand extends SubCommand {
     }
 
     @Override
-    public String getSuccessMessage() {
-        return "Successfully removed " + COUNTER + " npc";
+    public String getResultMessage() {
+        return ChatColor.DARK_GREEN + "Successfully removed " + COUNTER + " npc";
     }
 
     @Override

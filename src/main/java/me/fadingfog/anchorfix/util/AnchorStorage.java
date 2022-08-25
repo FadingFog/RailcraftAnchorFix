@@ -12,7 +12,7 @@ import java.text.MessageFormat;
 import java.util.*;
 
 
-@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressWarnings({"unchecked", "rawtypes", "DuplicatedCode"})
 public class AnchorStorage {
 
     private static AnchorStorage instance;
@@ -46,7 +46,7 @@ public class AnchorStorage {
         return config;
     }
 
-    public List<Map<String, String>> getAnchorList() {
+    public List<Map<String, String>> getAnchorList() {  // return info about all anchors
         reload();
 
         List<Map<String, String>> anchorList = new ArrayList();
@@ -64,7 +64,7 @@ public class AnchorStorage {
         return anchorList;
     }
 
-    public List<Map<String, String>> getAnchorList(Player player) {
+    public List<Map<String, String>> getAnchorList(Player player) {  // return info about all anchors of player
         reload();
 
         List<Map<String, String>> anchorList = new ArrayList();
@@ -80,6 +80,17 @@ public class AnchorStorage {
         }
 
         return anchorList;
+    }
+
+    public Map<String,List<Map<String,String>>> getPlayerAnchors(String playerName) {  // return player anchors by type
+        reload();
+
+        Map<String, Object> playerAnchors = new HashMap<>();
+        String path = MessageFormat.format("anchor.{0}", playerName);
+
+        if (config.isSet(path)) playerAnchors = config.getConfigurationSection(path).getValues(true);
+
+        return (Map<String,List<Map<String,String>>>) (Object) playerAnchors;
     }
 
     public void setAnchor(Player player, String type, Location location) {

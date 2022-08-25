@@ -11,6 +11,7 @@ commands:
     usage: |
            /<command> clean - remove missing in the world anchors from the config
            /<command> remove - remove all npc created by this plugin
+           /<command> check <player> [-i] - get a list of player anchors; -i for detailed info
     permission: anchorfix
 permissions:
   anchorfix:
